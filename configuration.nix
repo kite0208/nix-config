@@ -92,8 +92,10 @@ imports =
 	zoom
 	signal-desktop
 	bitwarden
+	lxappearance
 	
 	#i3
+	services.xserver.windowManager.i3.package = pkgs.i3-gaps;
 	environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw 
   	services.xserver = {
    	enable = true;
@@ -114,7 +116,6 @@ imports =
      ];
     };
   };
-  ...
 }
 
   ];
