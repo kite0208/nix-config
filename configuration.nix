@@ -43,7 +43,7 @@ imports =
   };
 
   # Configure console keymap
-  console.keyMap = "fr";
+  console.keyMap = "be-latin1";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
