@@ -38,12 +38,12 @@ imports =
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "fr";
+    layout = "be";
     xkbVariant = "";
   };
 
   # Configure console keymap
-  console.keyMap = "be-latin1";
+  console.keyMap = "be";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -87,9 +87,7 @@ imports =
 	firefox
 	gimp
 	droidcam
-	qjackctl
 	vscode
-	zoom
 	signal-desktop
 	bitwarden
 	lxappearance
