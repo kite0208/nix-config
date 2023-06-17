@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-imports =
+
+{
+  imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -11,7 +13,6 @@ imports =
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -27,7 +28,7 @@ imports =
   time.timeZone = "Europe/Brussels";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.utf8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -43,7 +44,7 @@ imports =
   };
 
   # Configure console keymap
-  console.keyMap = "be";
+  console.keyMap = "be-latin1";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -69,10 +70,14 @@ imports =
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nl = {
+  users.users.user = {
     isNormalUser = true;
-    description = "nl";
+    description = "user";
     extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      firefox
+    #  thunderbird
+    ];
   };
 
   # Allow unfree packages
@@ -81,41 +86,8 @@ imports =
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
- 	wget
-	git
-	firefox
-	gimp
-	droidcam
-	vscode
-	signal-desktop
-	bitwarden
-	lxappearance
-	
-	#i3
-	services.xserver.windowManager.i3.package = pkgs.i3-gaps;
-	environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw 
-  	services.xserver = {
-   	enable = true;
-    	desktopManager = {
-      	xterm.enable = false;
-    	};
-   
-    	displayManager = {
-        defaultSession = "none+i3";
-    	};
-
-    	windowManager.i3 = {
-      	enable = true;
-      	extraPackages = with pkgs; [
-        rofi #application launcher most people use
-        i3status # gives you the default i3 status bar
-        i3lock #default i3 screen locker
-     ];
-    };
-  };
-}
-
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -139,10 +111,10 @@ imports =
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leavecatenate(variables, "bootdev", bootdev)
+  # on your system were taken. It‘s perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 
 }
