@@ -117,7 +117,9 @@
    arc-theme
    papirus-icon-theme
    libreoffice-fresh
-   git   
+   git
+   obsidian
+   espeak
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
